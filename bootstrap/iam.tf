@@ -11,7 +11,7 @@ resource "aws_iam_user" "terraform_user" {
 data "aws_iam_policy_document" "s3_policy_document" {
 
   statement {
-    sid = "List any Bucket in our S3"
+    sid = "ListanyBucket"
 
     actions = [
       "s3:ListAllMyBuckets",
@@ -26,7 +26,7 @@ data "aws_iam_policy_document" "s3_policy_document" {
 
   statement {
 
-    sid = "User Access State file"
+    sid = "UserAccessStatefile"
 
     actions = [
       "s3:GetObject",
@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "s3_policy_document" {
 data "aws_iam_policy_document" "user_permissions" {
 
   statement {
-    sid = "List permissions this user has"
+    sid = "Listpermissions"
 
     actions = var.user_permission_list
 
@@ -69,6 +69,6 @@ data "aws_iam_policy_document" "terraform_user_policy_document" {
 # attach combined policy document to user 
 resource "aws_iam_user_policy" "terraform_policy" {
   name = "terraform-policy"
-  user = aws_iam_user.terraform_user.arn
+  user = aws_iam_user.terraform_user.name
   policy = data.aws_iam_policy_document.terraform_user_policy_document.json
 }

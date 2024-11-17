@@ -1,6 +1,6 @@
 # State Bucket 
 resource "aws_s3_bucket" "state_bucket" {
-  bucket = "${var.bucket_name}-state-s3"
+  bucket = "${var.bucket_name}-s3highbee"
   
   tags = {
     purpose = "Terraform State Bucket"
@@ -49,9 +49,9 @@ data "aws_iam_policy_document" "state_bucket_policy_document" {
   }
 }
 
-# Aattach Policyt to Bucket
+# Attach Policy to Bucket
 resource "aws_s3_bucket_policy" "state_bucket_policy_attachement" {
-  bucket = aws_s3_bucket.state_bucket.arn
+  bucket = aws_s3_bucket.state_bucket.id
   policy = data.aws_iam_policy_document.state_bucket_policy_document.json
 }
 

@@ -3,7 +3,7 @@ variable "bucket_name" {
 
    validation {
     condition = length(var.bucket_name) > 0
-    error_message = "terraform user name not set"
+    error_message = "bucket name not set"
   }
 }
 
